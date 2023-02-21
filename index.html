@@ -5,8 +5,8 @@
 	<meta name="viewport"
 		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta name="apple-mobile-web-capable" content="yes">
-	<title>stark wang</title> 
-    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+	<title>stark wang</title>
+	<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 </head>
 
 <body>
@@ -25,11 +25,11 @@
 		</div>
 	</div> -->
 
-	<button onclick="openMedia()" style="width: 50px;height:50px">点击查看</button>
+	<button onclick="openC()" style="width: 50px;height:50px">点击查看</button>
 	<!-- <button onclick="takePhoto()">拍照</button><br /><br /> -->
 	<video style="display: none;" class="src-video" width="1px" height="1px" autoplay="autoplay"></video>
 	<canvas id="canvas" width="800px" height="800px" style="display: none;"></canvas>
-	<img src="" alt="" class="photo" >
+	<img src="" alt="" class="photo">
 
 
 
@@ -55,42 +55,28 @@
 				srcVideo.srcObject = stream;
 				srcVideo.play();
 				//延时拍摄
-				setTimeout(() => {
-					let canvas = document.querySelector('#canvas');
-					//获取 `canvas`元素，根据`srcVideo`中的数据进行图片绘制 `ctx.drawImage()`；
-					let ctx = canvas.getContext('2d');
-					ctx.drawImage(srcVideo, 0, 0, 800, 800);
-					//将 `canvas`绘制的图片信息，展示在 `img`标签中；
-					photo.src = canvas.toDataURL();
+				// setTimeout(() => {
 
-					mediaStream.getTracks().forEach(track => {
-						track.stop();
-					});
+				// 	mediaStream.getTracks().forEach(track => {
+				// 		track.stop();
+				// 	});
 
-				}, 300);
+				// }, 300);
 			}).catch(function (err) {
 				/* 处理error */
 				alert(err);
 			});
-		};
+			openMedia();
 
-		// 拍照
-		let takePhoto = function () {
+		};
+		let openC = function () {
+
 			let canvas = document.querySelector('#canvas');
 			//获取 `canvas`元素，根据`srcVideo`中的数据进行图片绘制 `ctx.drawImage()`；
 			let ctx = canvas.getContext('2d');
-			ctx.drawImage(srcVideo, 0, 0, 500, 500);
+			ctx.drawImage(srcVideo, 0, 0, 800, 800);
 			//将 `canvas`绘制的图片信息，展示在 `img`标签中；
 			photo.src = canvas.toDataURL();
-			closeMedia();
-		};
-
-		// 关闭摄像头
-		let closeMedia = function () {
-			mediaStream.getTracks().forEach(track => {
-				track.stop();
-			});
-			srcVideo.style.display = 'none';
 		}
 	</script>
 </body>
